@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <style media="screen">
+        .main{
+          text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      Wait a Minute *_* *_* *_* *_ _*
+
+    </div>
+    <div class="main" id="mainContainer" hidden>
+
+
+    <img
+    height="100"
+     wigth="100"
+     id="profileImage">
+    <h2 id="FullName"> </h2>
+    <p id="bio"></p>
+    <h5 id="followersInformation"></h5>
+    <p>
+    Follow me on <a id="Githublink"> GitHub</a>
+    <a class="twitter-timeline" data-width="500" data-height="500" href="https://twitter.com/krishh3701?ref_src=twsrc%5Etfw">
+      Tweets by krishh3701</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </p>
+    </div>
+    <script>
+      fetch("https://api.github.com/users/Krishna701")
+       .then(response => response.json())
+       .then(function(data){
+         console.log(data)
+
+         let followersCount = data['followers']
+         let followersInfo = "I am new to GitHub. So I have ${followersCount} people on GitHub "
+         document.getElementById('profileImage').src = data["avatar_url"]
+         document.getElementById('FullName').textContent = data["name"]
+         document.getElementById('bio').textContent = data["bio"]
+         document.getElementById('followersInformation').textContent= followersInfo
+
+         document.getElementById('Githublink').href=data['html_url']
+         document.getElementById('mainContainer').hidden= false
+         document.getElementById('loading').hidden= true
+
+
+       })
+
+    </script>
+  </body>
+</html>
